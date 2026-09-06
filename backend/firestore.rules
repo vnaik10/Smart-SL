@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check driver role
+    function isDriver() {
+      return request.auth != null && request.auth.token.role == 'DRIVER';
+    }
+    
+    // Helper function to check admin role
+    function isAdmin() {
+      return request.auth != null && request.auth.token.role == 'ADMIN';
+    }
+
+    // Drivers can read their own profile, Admins can read/write all
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    // Vehicle registry
+    match /vehicles/{vehicleId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Smart poles directory
+    match /smart_poles/{poleId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Routes
+    match /routes/{routeId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Emergency sessions: Drivers can create and update their active session
+    match /emergency_sessions/{sessionId} {
+      allow read: if request.auth != null;
+      allow create: if isDriver() || isAdmin();
+      allow update: if (isDriver() && resource.data.driverId == request.auth.uid) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Road alerts: Read by all authenticated users, created by CAM/Admin/Driver
+    match /road_alerts/{alertId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if isAdmin();
+    }
+  }
+}

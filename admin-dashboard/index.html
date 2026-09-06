@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Emergency Corridor — Admin Operations Center</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-icon">🚨</div>
+        <div class="brand-text">
+          <h2>CORRIDOR COMMAND</h2>
+          <span>Smart Streetlight System</span>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="overview">📊 Overview</button>
+        <button class="nav-item" data-tab="live-map">🗺️ Live Corridor Map</button>
+        <button class="nav-item" data-tab="vehicles">🚑 Fleet Vehicles</button>
+        <button class="nav-item" data-tab="poles">💡 Smart Poles</button>
+        <button class="nav-item" data-tab="alerts">⚠️ Road Alerts</button>
+        <button class="nav-item" data-tab="history">📜 Emergency History</button>
+        <button class="nav-item" data-tab="simulator">🎮 Hardware Simulator</button>
+      </nav>
+      <div class="system-status-pill">
+        <span class="status-dot green"></span>
+        <span>Gateway: ONLINE (Mesh OK)</span>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="top-bar">
+        <div class="header-title">
+          <h1 id="view-title">System Overview</h1>
+          <p id="view-subtitle">Real-time emergency corridor telemetry and pole mesh status</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-warning" id="btn-trigger-alert">⚠️ Inject Road Obstacle</button>
+          <button class="btn btn-primary" id="btn-sim-ambulance">🚑 Start Simulated Run</button>
+        </div>
+      </header>
+
+      <!-- KPI Summary Cards -->
+      <section class="kpi-grid">
+        <div class="kpi-card red">
+          <div class="kpi-icon">🚨</div>
+          <div class="kpi-data">
+            <span class="kpi-value" id="kpi-active-emergencies">1</span>
+            <span class="kpi-label">Active Emergencies</span>
+          </div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-icon">💡</div>
+          <div class="kpi-data">
+            <span class="kpi-value" id="kpi-active-poles">2</span>
+            <span class="kpi-label">Active Corridor Poles (100%)</span>
+          </div>
+        </div>
+        <div class="kpi-card amber">
+          <div class="kpi-icon">⏳</div>
+          <div class="kpi-data">
+            <span class="kpi-value" id="kpi-preparing-poles">1</span>
+            <span class="kpi-label">Preparing Poles (Ahead)</span>
+          </div>
+        </div>
+        <div class="kpi-card blue">
+          <div class="kpi-icon">🔋</div>
+          <div class="kpi-data">
+            <span class="kpi-value" id="kpi-avg-battery">91%</span>
+            <span class="kpi-label">Average Solar Battery</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Map & Telemetry HUD -->
+      <section class="content-split">
+        <div class="map-card">
+          <div class="card-header">
+            <h3>Live 2 KM Corridor Wave Map</h3>
+            <span class="badge live">● LIVE RADAR</span>
+          </div>
+          <div id="map" class="map-view"></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="card-header">
+            <h3>Active Corridor Telemetry</h3>
+            <span class="badge red">CRITICAL PRIORITY</span>
+          </div>
+          <div class="telemetry-body">
+            <div class="data-row">
+              <span class="label">Vehicle:</span>
+              <span class="value" id="hud-vehicle">AMBULANCE KA-XX-1234</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Driver:</span>
+              <span class="value" id="hud-driver">Officer Sarah Chen (DRIVER001)</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Selected Route:</span>
+              <span class="value" id="hud-route">R01 — City Hospital Express</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Next Pole:</span>
+              <span class="value highlight" id="hud-next-pole">P02 (MG Road)</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Distance to Next Pole:</span>
+              <span class="value" id="hud-dist-pole">1.4 KM</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Corridor Speed:</span>
+              <span class="value" id="hud-speed">58 km/h</span>
+            </div>
+            <div class="data-row">
+              <span class="label">2 KM Zone Status:</span>
+              <span class="value green-text" id="hud-corridor-state">ACTIVATED & ADVANCING</span>
+            </div>
+
+            <hr class="divider" />
+
+            <h4>Smart Pole Wave Status</h4>
+            <div class="pole-wave-list" id="pole-wave-list">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

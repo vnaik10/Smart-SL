@@ -1,0 +1,63 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Center safe zone: 66dp within 108dp (margins 21dp) -->
+    <!-- Radar Waves / Corridor Guidance Signals (Cyan & Emerald) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#2200E5FF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:pathData="M26,38 A32,32 0 0,1 82,38" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#5500E5FF"
+        android:strokeWidth="3.0"
+        android:strokeLineCap="round"
+        android:pathData="M33,43 A24,24 0 0,1 75,43" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#AA00E5FF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M40,48 A16,16 0 0,1 68,48" />
+
+    <!-- Smart Streetlight Post & Luminaire (White / Silver) -->
+    <!-- Curved pole arm -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F0F4F8"
+        android:strokeWidth="3.2"
+        android:strokeLineCap="round"
+        android:pathData="M54,82 L54,42 C54,34 50,28 42,28 L36,28" />
+    <!-- Streetlight fixture head -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M32,26 L42,26 L40,31 L34,31 Z" />
+    <!-- Glowing light cone from head -->
+    <path
+        android:fillColor="#2200E5FF"
+        android:pathData="M37,31 L20,78 L68,78 Z" />
+
+    <!-- Emergency Cross Badge at Center -->
+    <!-- Outer Shield / Circle -->
+    <path
+        android:fillColor="#D90429"
+        android:pathData="M54,48 A14,14 0 1,1 53.9,48 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.2"
+        android:pathData="M54,48 A14,14 0 1,1 53.9,48 Z" />
+    <!-- Cross icon inside badge -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52,40 H56 V46 H62 V50 H56 V56 H52 V50 H46 V46 H52 Z" />
+
+    <!-- Green corridor active status dot -->
+    <path
+        android:fillColor="#00F5D4"
+        android:pathData="M54,78 A4,4 0 1,1 53.9,78 Z" />
+</vector>

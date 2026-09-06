@@ -1,0 +1,6 @@
+{
+  "name": "Smart Streetlight",
+  "description": "Smart Streetlight emergency corridor system with real-time GPS tracking, 2 KM advance streetlight activation wave, adaptive routing, obstacle alerts, and IoT ESP32 mesh network.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
